@@ -6,7 +6,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>studio.dreamys</groupId>
-    <artifactId>Hephaestus</artifactId>
+    <artifactId>Zephyrus</artifactId>
     <version>2.0-RELEASE</version>
 
     <build>
@@ -35,7 +35,7 @@
 <!--                            <minimizeJar>true</minimizeJar>-->
                             <transformers>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>studio.dreamys.Hephaestus</mainClass>
+                                    <mainClass>studio.dreamys.Zephyrus</mainClass>
                                 </transformer>
                             </transformers>
                             <filters>

